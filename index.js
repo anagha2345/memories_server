@@ -4,6 +4,10 @@ const express=require('express')
 //create the server    or app or call it anything
 const server=express()
 
+
+//multer
+const multer=require('multer')
+
 // import cors used for connect with front end
 const cors=require('cors')
 const logic=require('./service/logic')
@@ -24,7 +28,7 @@ server.get('/getmemories',(req,res)=>{
 })
 
 server.post('/addMemory',(req,res)=>{
-    logic.addMemories(req.body.id,req.body.title,req.body.date,req.body.description,req.body.image).then(result=>{
+    logic.addMemories(req.body.id,req.body.title,req.body,req.body.date,req.body.description,req.body.image).then(result=>{
         res.status(result.statusCode).json(result)
     })
 })
@@ -35,6 +39,11 @@ server.delete('/deleteMemory/:id',(req,res)=>{
 })
 server.get('/getaMemory/:id',(req,res)=>{
     logic.getaMemory(req.params.id).then(result=>{
+        res.status(result.statusCode).json(result)
+    })
+})
+server.post('/update',(req,res)=>{
+    logic.editaMemory(req.body.mid,req.body.memTitle,req.body.memDetails,req.body.memImage,req.body.date).then(result=>{
         res.status(result.statusCode).json(result)
     })
 })

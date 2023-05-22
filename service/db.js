@@ -8,7 +8,8 @@ const Memorie=mongoose.model('Memorie',{
     title:String,   
     description:String,
     image:String,
-    date:String
+    date:String,
+    pics:[]
     
 
 

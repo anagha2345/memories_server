@@ -74,6 +74,34 @@ const getaMemory=(id)=>{
         }
     })
 }
+const likeaMemory=(id)=>{
+  return db.Favourite.findOne({id}).then(result=>{
+    console.log(result);
+   })
+}
+const editaMemory=(id,title,details,image,date)=>{
+     return db.Memorie.findOne({id}).then(result=>{
+        console.log(result);
+        if(result){
+            result.title=title,
+            result.description=details,
+            result.image=image,
+            result.date=date
+            result.save()
+            return{
+                 statusCode:200,
+                 message:"updated"
+            }
+        }
+        else{
+            return{
+                 statusCode:404,
+                 message:"can't update"
+                }
+           
+        }
+     })
+}
 module.exports={
-    allMemories,addMemories,removeMemory,getaMemory
+    allMemories,addMemories,removeMemory,getaMemory,likeaMemory,editaMemory
 }
